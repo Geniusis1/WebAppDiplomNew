@@ -1,0 +1,38 @@
+﻿@page
+
+<body>
+    <div class="container">
+        <div class="row mt-5 mx-auto">
+            <div class="col-auto m-0 p-0 bg-light border">
+                <div class="p-3">
+                    <h2>Вход</h2><br />
+                    <form action="/view" method="post">
+                        <label>Username</label><br />
+                        <input type="text" name="login" /><br />
+
+                        <label>Password</label><br />
+                        <input type="password" name="pass" /><br />
+
+                        <label>Group</label><br />
+                        <input type="text" name="group" /><br />
+
+                        <div class="mt-4">
+                            <input type="submit" value="Войти" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="col-auto m-0 p-0 bg-info border">
+                <div class="p-3">
+                    <h2>Информация</h2><br />
+                    <div>
+                        <ul>
+                            <li>Для обычного просмотра задний логин и пароль остается пустым</li>
+                            <li>Для редактирования заданий логин и пароль заполняется</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
