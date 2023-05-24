@@ -5,14 +5,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebAppDiplomNew.Models.Context;
+using WebAppDiplomNew.Models;
 
 #nullable disable
 
 namespace WebAppDiplomNew.Migrations
 {
     [DbContext(typeof(DB))]
-    [Migration("20230519091215_Init")]
+    [Migration("20230522091541_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -25,7 +25,7 @@ namespace WebAppDiplomNew.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DiplomWeb_Service.Models.Group", b =>
+            modelBuilder.Entity("WebAppDiplomNew.Models.Group", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -42,7 +42,7 @@ namespace WebAppDiplomNew.Migrations
                     b.ToTable("Groups");
                 });
 
-            modelBuilder.Entity("DiplomWeb_Service.Models.Inform", b =>
+            modelBuilder.Entity("WebAppDiplomNew.Models.Inform", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,7 +73,7 @@ namespace WebAppDiplomNew.Migrations
                     b.ToTable("Informs");
                 });
 
-            modelBuilder.Entity("DiplomWeb_Service.Models.User", b =>
+            modelBuilder.Entity("WebAppDiplomNew.Models.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -99,9 +99,9 @@ namespace WebAppDiplomNew.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("DiplomWeb_Service.Models.Inform", b =>
+            modelBuilder.Entity("WebAppDiplomNew.Models.Inform", b =>
                 {
-                    b.HasOne("DiplomWeb_Service.Models.Group", "Group")
+                    b.HasOne("WebAppDiplomNew.Models.Group", "Group")
                         .WithMany()
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -110,9 +110,9 @@ namespace WebAppDiplomNew.Migrations
                     b.Navigation("Group");
                 });
 
-            modelBuilder.Entity("DiplomWeb_Service.Models.User", b =>
+            modelBuilder.Entity("WebAppDiplomNew.Models.User", b =>
                 {
-                    b.HasOne("DiplomWeb_Service.Models.Group", "Group")
+                    b.HasOne("WebAppDiplomNew.Models.Group", "Group")
                         .WithMany()
                         .HasForeignKey("GroupId")
                         .OnDelete(DeleteBehavior.Cascade)

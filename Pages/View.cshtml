@@ -1,0 +1,38 @@
+﻿@page
+@model WebAppDiplomNew.Pages.Shared.ViewModel
+@using WebAppDiplomNew;
+
+<body>
+	<div class="container">
+		<div class="row mt-5 mx-auto">
+			<table class="table table-bordered border-success">
+				<tbody>
+					<tr class="table-info border-success">
+						<th>#</th>
+						@foreach(var t in Model.TimeLine)
+						{
+							<th>@t</th>
+						}
+					</tr>
+					@for(int d = 0; d < Model.DaysLine.Length; d++)
+					{
+						<tr>
+							<th class="table-info border-success">@Model.DaysLine[d]</th>
+							@foreach(var t in Model.TimeLine)
+							{
+								@if (Model.Info[d].ContainsKey(t))
+								{
+									<td>@Model.Info[d][t]</td>
+								}
+								else
+								{
+									<td></td>
+								}
+							}
+						</tr>
+					}
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>

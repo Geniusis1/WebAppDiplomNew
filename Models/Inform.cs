@@ -1,4 +1,4 @@
-﻿namespace DiplomWeb_Service.Models
+﻿namespace WebAppDiplomNew.Models
 {
     public class Inform
     {
@@ -7,6 +7,6 @@
         public DateTime Time { get; set; }
         public string Name_lesson { get; set; }
         public Group Group { get; set; }
-        public string? Text { get; set; }
+        public string Text { get; set; }
     }
 }
