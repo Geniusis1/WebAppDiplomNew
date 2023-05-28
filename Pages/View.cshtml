@@ -24,19 +24,18 @@
 							else
 							{
 								<th class="table-info border-success">@Model.DaysLine[d]<br />(@Model.FirstDay.AddDays(d).ToString("dd/MM/yyyy"))</th>
-							}
+							}ы
 
 							@foreach(var t in Model.TimeLine)
 							{
 								<form>
+									<td>
 									@if (Model.Info[d].ContainsKey(t))
 									{
-										<td>@Model.Info[d][t]</td>
+										@(Model.Info[d][t])<hr />
+										<button type="submit" class="btn btn-outline-info btn-sm">Добавить</button>
 									}
-									else
-									{
-										<td></td>
-									}
+									</td>
 								</form>
 							}
 						</tr>
