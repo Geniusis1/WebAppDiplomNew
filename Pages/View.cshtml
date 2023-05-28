@@ -17,22 +17,49 @@
 					@for(int d = 0; d < Model.DaysLine.Length; d++)
 					{
 						<tr>
-							<th class="table-info border-success">@Model.DaysLine[d]</th>
+							@if ((int)DateTime.Now.DayOfWeek - 1 == d && Model.Week == 0)
+							{
+								<th class="table-info border-success table-danger">@Model.DaysLine[d]<br />(@DateTime.Now.ToString("dd/MM/yyyy"))</th>
+							}
+							else
+							{
+								<th class="table-info border-success">@Model.DaysLine[d]<br />(@Model.FirstDay.AddDays(d).ToString("dd/MM/yyyy"))</th>
+							}
+
 							@foreach(var t in Model.TimeLine)
 							{
-								@if (Model.Info[d].ContainsKey(t))
-								{
-									<td>@Model.Info[d][t]</td>
-								}
-								else
-								{
-									<td></td>
-								}
+								<form>
+									@if (Model.Info[d].ContainsKey(t))
+									{
+										<td>@Model.Info[d][t]</td>
+									}
+									else
+									{
+										<td></td>
+									}
+								</form>
 							}
 						</tr>
 					}
 				</tbody>
 			</table>
+			<div class="d-flex mx-auto">
+				<form class="row" method="get">
+					<input type="hidden" name="group" value="@Model.Group.Name">
+					@if (Model.Week != 0)
+					{
+						<div class="col m-1 d-flex justify-content-start">
+							<button type="submit" class="btn btn-secondary" name="week" value="@(Model.Week - 1)">Назад</button>
+						</div>
+					}
+					@if (Model.Week < 7)
+					{
+						<div class="col m-1 d-flex justify-content-end">
+							<button type="submit" class="btn btn-secondary" name="week" value="@(Model.Week + 1)">Вперед</button>
+						</div>
+					}
+				</form>
+			</div>
 		</div>
 	</div>
 </body>

@@ -8,13 +8,15 @@ namespace WebAppDiplomNew.Pages.Shared
 {
 	public class ViewModel : PageModel
 	{
-		private Group group;
 		private DB db;
 		private bool access;
 
 		public string[] TimeLine { get; private set; }
 		public string[] DaysLine { get; private set; }
 		public Dictionary<int, Dictionary<string, string>> Info { get; private set; }
+		public int Week { get; private set; }
+		public DateTime FirstDay { get; private set; }
+		public Group Group { get; private set; }
 
 		public ViewModel()
 		{
@@ -22,27 +24,29 @@ namespace WebAppDiplomNew.Pages.Shared
 			access = false;
 			TimeLine = Settings_app.TimesLess;
 			DaysLine = Settings_app.DaysLess;
+			Week = 0;
 
 			Info = new Dictionary<int, Dictionary<string, string>>();
 		}
 
-		public void OnGet(string group, string week)
+		public void OnGet(string group, int week)
 		{
 			//Проверка доступа на изменение
 			access = Request.Cookies["onLogin"].Equals("true") || Request.Cookies["group"].Equals(group);
-            this.group = db.Groups.FirstOrDefault(g => g.Name == group);
+            Group = db.Groups.FirstOrDefault(g => g.Name == group);
+			Week = week;
 
 			var task = GetInfo();
 			task.Wait();
+
+			//Первый день в неделе
+			FirstDay = DateTime.Now.AddDays((int)DateTime.Now.DayOfWeek - 6 + (week * 7));
         }
 
 		private async Task GetInfo()
 		{
-            //Ссылка для поиска группы
-            //http://rasp.pgups.ru/search?title=ИВБ-911&by=group
-
             //Поиск ссылки на расписание группы
-            Url url = new Url(@"http://rasp.pgups.ru/search?title=" + group.Name + @"&by=group");
+            Url url = new Url(@"http://rasp.pgups.ru/search?title=" + Group.Name + @"&by=group");
 
             var config = Configuration.Default.WithDefaultLoader();
             var context = BrowsingContext.New(config);
@@ -76,5 +80,10 @@ namespace WebAppDiplomNew.Pages.Shared
                 countWeek++;
             }
         }
+
+		private void GetNotes()
+		{
+
+		}
     }
 }
